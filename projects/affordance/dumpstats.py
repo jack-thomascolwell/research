@@ -2,8 +2,8 @@
 
 from os.path import join as join_path, exists as file_exists
 from collections import defaultdict, Counter
-from worddb import CondProbDict  # pylint disable=import-error
-from utils import get_filename_from_folder  # pylint disable=import-error
+from projects.affordance.worddb import CondProbDict  # pylint disable=import-error
+from projects.affordance.utils import get_filename_from_folder  # pylint disable=import-error
 
 
 class DumpStats:

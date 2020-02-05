@@ -5,8 +5,8 @@ from time import time
 from os import mkdir
 from os.path import exists as file_exists, dirname, realpath
 from collections import namedtuple
-from dumpstats import DumpStats
-from utils import *
+from projects.affordance.dumpstats import DumpStats
+from projects.affordance.utils import *
 
 # make sure research library code is available
 ROOT_DIRECTORY = dirname(dirname(dirname(realpath(__file__))))
