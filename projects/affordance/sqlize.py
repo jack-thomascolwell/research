@@ -12,11 +12,10 @@ def prob_txt_to_sql(filename, idx=0):
 	conn = sqlite3.connect('%s.db' % filename)
 	c = conn.cursor()
 	# prepare the names for columns
-	c_name = filename.rsplit("_")z
+	c_name = filename.rsplit("_")
 
 	# Create a table with the column names
 	try: 
-		
 		c.execute("""CREATE TABLE %s(
 					%s text,
 					%s text,
@@ -56,7 +55,7 @@ def get_entry_by_noun(filename, noun, items=0):
 	    	   		  else: fetch items many items
     	:return: a list of tuple in the db
     """
-	conn = sqlite3.connect('%s.db' % filename)
+	conn = sqlite3.connect('data/prob_sql/%s.db' % filename)
 	c = conn.cursor()
 	c.execute("SELECT * FROM %s WHERE noun='%s' ORDER BY prob DESC" % (filename, noun))
 
@@ -67,15 +66,15 @@ def get_entry_by_noun(filename, noun, items=0):
 	
 
 def get_entry_by_verb(filename, verb, items=0):
-		"""utility function that obtain verb from database with a descending order of probability
+	"""utility function that obtain verb from database with a descending order of probability
 
-	    :param filename: name of the db
-	    	   verb: the verb to extract
-	    	   items: if 0 -> fetch all
-	    	   		  else: fetch items many items
-    	:return: a list of tuple in the db
+    :param filename: name of the db
+    	   verb: the verb to extract
+    	   items: if 0 -> fetch all
+    	   		  else: fetch items many items
+	:return: a list of tuple in the db
     """
-	conn = sqlite3.connect('%s.db' % filename)
+	conn = sqlite3.connect('data/prob_sql/%s.db' % filename)
 	c = conn.cursor()
 	c.execute("SELECT * FROM %s WHERE verb='%s' ORDER BY prob DESC" % (filename, verb))
 
@@ -83,6 +82,26 @@ def get_entry_by_verb(filename, verb, items=0):
 		return c.fetchall()
 	else: 
 		return c.fetchmany(items)
+
+
+def get_entry_by_adj(filename, adj, items=0):
+	"""utility function that obtain adj from database with a descending order of probability
+
+    :param filename: name of the db
+    	   adj: the adj to extract
+    	   items: if 0 -> fetch all
+    	   		  else: fetch items many items
+	:return: a list of tuple in the db
+    """
+	conn = sqlite3.connect('data/prob_sql/%s.db' % filename)
+	c = conn.cursor()
+	c.execute("SELECT * FROM %s WHERE adj='%s' ORDER BY prob DESC" % (filename, adj))
+
+	if items == 0:
+		return c.fetchall()
+	else: 
+		return c.fetchmany(items)
+
 
 def pipeline():
 	"""This pipeline encode listed files to sqlite form"""
@@ -100,11 +119,12 @@ def pipeline():
 def main():
 	# transfer files to sqlite darabase
 	pipeline()
-
+	
 	## Running trials
+	# filename = "prob_verb_adj_3"
 	# print(get_entry_by_verb(filename, "kill"))
 	# print(get_entry_by_noun(filename, "brick"))
-	# print(get_entry_by_verb("prob_verb_adj_3", "kill", 10))
+	# print(get_entry_by_adj("prob_verb_adj_3", "sharp", 10))
 
 
 if __name__ == "__main__":
