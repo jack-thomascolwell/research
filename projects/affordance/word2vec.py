@@ -13,8 +13,8 @@ from nltk.corpus import wordnet as wn, words
 ROOT_DIRECTORY = dirname(dirname(dirname(realpath(__file__))))
 sys.path.insert(0, ROOT_DIRECTORY)
 
-from utils import *
-from research.knowledge_base import KnowledgeFile, URI
+from projects.affordance.utils import *
+from research.knowledge_base import KnowledgeFile, Value
 
 
 UMBEL_KB_PATH = join_path(ROOT_DIRECTORY, 'data/kbs/umbel-concepts-typology.rdfsqlite')
