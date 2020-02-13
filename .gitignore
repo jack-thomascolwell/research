@@ -1,3 +1,7 @@
 **/data/
+<<<<<<< HEAD
+**/results/
+=======
 **/results/
 .idea/
+>>>>>>> project-affordance

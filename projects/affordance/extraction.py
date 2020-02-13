@@ -5,8 +5,8 @@ from time import time
 from os import mkdir
 from os.path import exists as file_exists, dirname, realpath
 from collections import namedtuple
-from dumpstats import DumpStats
-from utils import *
+from projects.affordance.dumpstats import DumpStats
+from projects.affordance.utils import *
 
 # make sure research library code is available
 ROOT_DIRECTORY = dirname(dirname(dirname(realpath(__file__))))
@@ -139,7 +139,6 @@ def get_verbs_for_noun(noun):
 
     dump_dir = join_path(ROOT_DIRECTORY, "data/temp_test/dump")  # todo: change this                                                       
     stats_dir = join_path(ROOT_DIRECTORY, "data/temp_test/stats")  # todo: change this                                                     
-    extract_from_folder(dump_dir, stats_dir)  
-    print(stats_dir)
+    extract_from_folder(dump_dir, stats_dir)
     dump_stats = DumpStats(dump_dir, stats_dir)
     return get_verbs_from_dump(dump_stats, noun)

@@ -10,19 +10,33 @@ import nltk
 from nltk.wsd import lesk
 from nltk.corpus import wordnet as wn
 from PyDictionary import PyDictionary
+from research.knowledge_base import KnowledgeFile, Value
 
 # update and load models
-nltk.download('wordnet', download_dir=nltk.data.path[0])
-nltk.download('words', download_dir=nltk.data.path[0])
+try:
+    nltk.corpus.wordnet.ensure_loaded()
+    nltk.corpus.words.ensure_loaded()
+    nltk.download('wordnet')
+    nltk.download('words')
+
+except LookupError:
+    # XXX hack to get around SSL certificate issue
+    # https://stackoverflow.com/questions/38916452/nltk-download-ssl-certificate-verify-failed
+    import ssl
+    ssl._create_default_https_context = ssl._create_unverified_context
+    nltk.corpus.wordnet.ensure_loaded()
+    nltk.corpus.words.ensure_loaded()
+    nltk.download('wordnet')
+    nltk.download('words')
+
 DICTIONARY = PyDictionary()
 
 # make sure research library code is available
 ROOT_DIRECTORY = dirname(dirname(dirname(realpath(__file__))))
 sys.path.insert(0, ROOT_DIRECTORY)
 
-from research.knowledge_base import KnowledgeFile, Value
 
-UMBEL_KB_PATH = join_path(ROOT_DIRECTORY, 'data/kbs/umbel-concepts-typology.rdfsqlite')
+UMBEL_KB_PATH = join_path(ROOT_DIRECTORY, 'data/kbs/umbel-concepts-typology.n3')
 UMBEL = KnowledgeFile(UMBEL_KB_PATH)
 
 spacy_model = 'en_core_web_sm'
