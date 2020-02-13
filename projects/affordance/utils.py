@@ -36,7 +36,7 @@ ROOT_DIRECTORY = dirname(dirname(dirname(realpath(__file__))))
 sys.path.insert(0, ROOT_DIRECTORY)
 
 
-UMBEL_KB_PATH = join_path(ROOT_DIRECTORY, 'data/kbs/umbel-concepts-typology.rdfsqlite')
+UMBEL_KB_PATH = join_path(ROOT_DIRECTORY, 'data/kbs/umbel-concepts-typology.n3')
 UMBEL = KnowledgeFile(UMBEL_KB_PATH)
 
 spacy_model = 'en_core_web_sm'
