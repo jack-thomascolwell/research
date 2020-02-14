@@ -10,7 +10,6 @@ import nltk
 from nltk.wsd import lesk
 from nltk.corpus import wordnet as wn
 from PyDictionary import PyDictionary
-from research.knowledge_base import KnowledgeFile, Value
 
 # update and load models
 try:
