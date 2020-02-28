@@ -57,6 +57,11 @@ RULES = {
         '([VERB] (prep [PREP] (pobj [OBJ])) (nsubj [SUB]))',
         '([VERB] (nsubj [SUB]))',
         '("use" (dobj [TOOL]) (xcomp [VERB] (dobj [OBJ])))',
+        #'("use" (dobj [TOOL]) (xcomp [VERB]) (punct [OBJ]))', # This rule works on its own but not with the other rules (punct [OBJ])
+        '([VERB] (prep) (punct [TOOL]) (dobj [OBJ]) (nsubj [SUB]))',
+        '([VERB] (prep [PREP] (pobj [OBJ])) (punct [TOOL]) (nsubj [SUB])',
+        '([VERB] (advcl (dobj [TOOL]) (punct [OBJ]) (nsubj [SUB]))',
+        '("use" (nsubjpass [TOOL]) (agent (pobj [SUB])) (xcomp [VERB]) (punct [OBJ]))'
     ),
     'NOUN': (
         '([NOUN] (amod [ADJ]))',
@@ -143,6 +148,19 @@ def main():
         'The knife cut through the rancid meat like hot butter.',
         'She used the knife to free herself, and cut herself in the process.',
         'She used the knife to free herself, and she cut herself in the process.',
+        "She cut the cake with the knife.",
+        "She cut through the cake with the knife.",
+        "She used the knife to cut through the cake.",
+        "She cut the cake with the sharp knife.",
+        "She cut through the cake with the sharp knife.",
+        "She used the sharp knife to cut through the cake.",
+        "Using the knife, she cut through the cake.",
+        "Using the sharp knife, she cut through the cake.",
+        "Using the knife, she cut the cake.",
+        "Using the sharp knife, she cut the cake.",
+        "She cut the cake.",
+        "The knife was used by her to cut the cake.",
+        "She cut herself"
     ]
     for sentence in sentences:
         doc = NLP(sentence)
